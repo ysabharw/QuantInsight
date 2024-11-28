@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>Stock Data</h1>
+    <form method="POST">
+        <label for="ticker">Enter Stock Ticker:</label>
+        <input type="text" id="ticker" name="ticker" placeholder="e.g., AAPL" required>
+        <button type="submit">Fetch Data</button>
+    </form>
+    
+    <!-- Display an error message if there's an issue -->
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    
+    <!-- Display stock data if available -->
+    {% if ticker %}
+        <h2>Stock Prices for {{ ticker }}</h2>
+        <ul>
+            {% for date, price in zip(dates, prices) %}
+                <li>{{ date }}: ${{ price }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
